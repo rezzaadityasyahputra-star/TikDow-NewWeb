@@ -19,7 +19,7 @@
         }
         .glass {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .gradient-text {
@@ -27,64 +27,80 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        .btn-hover:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
+        
+        /* Modern Hamburger/Dots Animation */
+        .menu-trigger {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
         }
-
-        /* Animasi Titik Tiga */
-        .menu-dot {
+        .dot {
             width: 6px;
             height: 6px;
             background-color: #00f2fe;
             border-radius: 50%;
-            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        .active .dot:nth-child(1) { transform: translateY(10px) rotate(45deg); width: 25px; height: 3px; border-radius: 2px; background: #ff0055; }
+        .active .dot:nth-child(2) { opacity: 0; transform: scale(0); }
+        .active .dot:nth-child(3) { transform: translateY(-10px) rotate(-45deg); width: 25px; height: 3px; border-radius: 2px; background: #7000ff; }
 
-        .menu-container:hover .dot-1 { transform: translateX(5px); }
-        .menu-container:hover .dot-3 { transform: translateX(-5px); }
-        
-        /* State aktif saat dipencet */
-        .menu-container.active .dot-1 { transform: translateY(12px) scale(1.2); background-color: #ff0055; }
-        .menu-container.active .dot-2 { transform: scale(0.8); opacity: 0.5; }
-        .menu-container.active .dot-3 { transform: translateY(-12px) scale(1.2); background-color: #7000ff; }
-
-        /* Dropdown Menu Style */
-        #sideMenu {
+        /* Modern Dashboard Dropdown */
+        #dashboardMenu {
+            visibility: hidden;
             opacity: 0;
-            pointer-events: none;
-            transform: translateY(-10px) translateX(-10px);
-            transition: all 0.3s ease;
+            transform: scale(0.9) translateY(-20px);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-origin: top left;
         }
-        .menu-container.active #sideMenu {
+        .active #dashboardMenu {
+            visibility: visible;
             opacity: 1;
-            pointer-events: auto;
-            transform: translateY(0) translateX(0);
+            transform: scale(1) translateY(0);
+        }
+
+        .btn-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(79, 172, 254, 0.4);
         }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center p-4">
 
     <div class="fixed top-8 left-8 z-50">
-        <div onclick="toggleMenu(this)" class="menu-container cursor-pointer flex flex-col gap-1.5 p-2 group relative">
-            <div class="menu-dot dot-1"></div>
-            <div class="menu-dot dot-2"></div>
-            <div class="menu-dot dot-3"></div>
+        <div id="menuWrapper" class="relative">
+            <button onclick="toggleMenu()" class="menu-trigger glass hover:bg-white/10">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </button>
 
-            <div id="sideMenu" class="absolute top-12 left-0 w-48 glass rounded-2xl p-2 shadow-2xl">
-                <button onclick="alert('Fitur History segera hadir!')" class="w-full text-left px-4 py-3 hover:bg-white/10 rounded-xl transition-colors flex items-center gap-3 group/item">
-                    <div class="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center group-hover/item:bg-cyan-500 transition-colors">
-                        <i class="fas fa-history text-cyan-400 group-hover/item:text-black text-xs"></i>
-                    </div>
-                    <span class="text-sm font-medium">History</span>
-                </button>
+            <div id="dashboardMenu" class="absolute top-14 left-0 w-56 glass rounded-2xl p-3 shadow-2xl overflow-hidden">
+                <p class="text-[10px] text-gray-400 font-bold tracking-widest px-4 mb-2 uppercase">Menu Utama</p>
                 
-                <button onclick="alert('RezTik v1.0 - Dibuat dengan menggunakan html')" class="w-full text-left px-4 py-3 hover:bg-white/10 rounded-xl transition-colors flex items-center gap-3 group/item">
-                    <div class="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center group-hover/item:bg-purple-500 transition-colors">
-                        <i class="fas fa-info-circle text-purple-400 group-hover/item:text-white text-xs"></i>
-                    </div>
-                    <span class="text-sm font-medium">About App</span>
-                </button>
+                <div class="space-y-1">
+                    <a href="https://github.com" target="_blank" class="block px-4 py-3 rounded-xl hover:bg-cyan-500/10 hover:text-cyan-400 transition-all">
+                        <span class="text-sm font-semibold">TES TKA</span>
+                    </a>
+
+                    <a href="https://unband-whatsapp-vl74.vercel.app/" target="_blank" class="block px-4 py-3 rounded-xl hover:bg-pink-500/10 hover:text-pink-400 transition-all">
+                        <span class="text-sm font-semibold">UNBANDWA</span>
+                    </a>
+
+                    <a href="https://paypal.me" target="_blank" class="block px-4 py-3 rounded-xl hover:bg-yellow-500/10 hover:text-yellow-400 transition-all">
+                        <span class="text-sm font-semibold">BERANDA</span>
+                    </a>
+                </div>
+
+                <div class="mt-3 pt-3 border-t border-white/10 text-center">
+                    <p class="text-[10px] text-gray-500">RezTik Website V1.0.1</p>
+                </div>
             </div>
         </div>
     </div>
@@ -132,25 +148,22 @@
     </main>
 
     <footer class="mt-12 text-gray-500 text-xs animate__animated animate__fadeIn">
-        &copy; 2024 <span class="text-cyan-500">RezTik</span>. Terinspirasi oleh Kecepatan & Keindahan.
+        &copy; 2026 <span class="text-cyan-500">RezTik</span>. TIKTOK DOWNLOADER WORKING V1.0.1
     </footer>
 
     <script>
-        function toggleMenu(el) {
-            el.classList.toggle('active');
-            
-            // Menutup menu jika klik di luar
-            const closeOnClickOutside = (e) => {
-                if (!el.contains(e.target)) {
-                    el.classList.remove('active');
-                    document.removeEventListener('click', closeOnClickOutside);
-                }
-            };
-            
-            if(el.classList.contains('active')) {
-                setTimeout(() => {
-                    document.addEventListener('click', closeOnClickOutside);
-                }, 10);
+        function toggleMenu() {
+            const wrapper = document.getElementById('menuWrapper');
+            wrapper.classList.toggle('active');
+
+            if (wrapper.classList.contains('active')) {
+                const closeHandler = (e) => {
+                    if (!wrapper.contains(e.target)) {
+                        wrapper.classList.remove('active');
+                        document.removeEventListener('click', closeHandler);
+                    }
+                };
+                setTimeout(() => document.addEventListener('click', closeHandler), 100);
             }
         }
 
