@@ -238,10 +238,21 @@
     </div>
 
     <nav class="sidebar" id="sidebar">
-        <button class="menu-btn"><i class="fas fa-clock-rotate-left"></i> IG DOWNLOADER</button>
-<button class="menu-btn"><i class="fas fa-heart"></i> BERANDA</button>
-        <button class="menu-btn" onclick="location.reload()"><i class="fas fa-refresh"></i> YT DOWNLOADER</button>
-    </nav>
+    <!-- Redirect ke Instagram Downloader -->
+    <button class="menu-btn" onclick="window.location.href='https://instadow-byreza.vercel.app/'">
+        <i class="fas fa-clock-rotate-left"></i> IG DOWNLOADER
+    </button>
+
+    <!-- Redirect ke TikTok Downloader -->
+    <button class="menu-btn" onclick="window.location.href='https://ytdow-byreza.vercel.app/'">
+        <i class="fas fa-heart"></i> YT DOWNLOADER 
+    </button>
+
+    <!-- Tetap Refresh untuk YouTube Downloader -->
+    <button class="menu-btn" onclick="location.reload()">
+        <i class="fas fa-refresh"></i> TT DOWNLOADER 
+    </button>
+</nav>
 
     <div class="main-card">
         <div class="logo-box">
@@ -347,4 +358,4 @@
         });
     </script>
 </body>
-    </html>
+        </html>
